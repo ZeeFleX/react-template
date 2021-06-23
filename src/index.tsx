@@ -10,7 +10,6 @@ import { Router } from "react-router";
 
 // stores
 import Navigation from "./stores/navigation.store";
-import News from "./stores/news.store";
 
 const browserHistory = createBrowserHistory();
 const routing = new RouterStore();
@@ -18,8 +17,7 @@ const history = syncHistoryWithStore(browserHistory, routing);
 
 const stores = {
   routing,
-  Navigation,
-  News,
+  Navigation
 };
 
 ReactDOM.render(

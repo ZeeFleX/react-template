@@ -1,9 +1,7 @@
-import news from "../mocks/news.json";
-
-export function getNewsAction() {
+export function getUsersAction() {
   return new Promise((resolve, reject) => {
     setTimeout(() => {
-      resolve(news);
+      resolve([]);
     }, 1000);
   });
 }

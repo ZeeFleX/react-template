@@ -1,4 +1,4 @@
-import { observable, computed, action } from "mobx";
+import { observable } from "mobx";
 
 class NavigationStore {
   // Properties
@@ -7,11 +7,6 @@ class NavigationStore {
       id: 1,
       text: "Mainpage",
       link: "/",
-    },
-    {
-      id: 2,
-      text: "Page 1",
-      link: "/page1",
     },
   ];
 

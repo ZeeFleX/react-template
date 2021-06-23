@@ -1,27 +1,33 @@
-import React, { Component } from "react";
+import React from "react";
 import { Route } from "react-router";
 import { inject, observer } from "mobx-react";
 
 // components
 import Header from "./components/header";
 import Mainpage from "./components/mainpage";
-import Page1 from "./components/page1";
 
 // styles
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.sass";
 
-@inject("routing", "Navigation")
-@observer
-export default class App extends Component<any> {
-  render() {
-    const { menuItems } = this.props.Navigation;
+type AppComponentProps = {
+  routing?: any;
+  Navigation?: any;
+};
+
+const AppComponent: React.FC<AppComponentProps> = inject(
+  "routing",
+  "Navigation"
+)(
+  observer(({ Navigation }: AppComponentProps): JSX.Element => {
+    const { menuItems } = Navigation;
     return (
       <div className="App">
         <Header menuItems={menuItems} />
         <Route exact path={`/`} component={Mainpage} />
-        <Route exact path={`/page1`} component={Page1} />
       </div>
     );
-  }
-}
+  })
+);
+
+export default AppComponent;
