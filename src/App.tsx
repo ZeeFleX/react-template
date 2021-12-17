@@ -1,33 +1,30 @@
-import React from "react";
-import { Route } from "react-router";
-import { inject, observer } from "mobx-react";
+import React from 'react';
+import { Routes, Route, BrowserRouter } from 'react-router-dom';
+import PrivateRoute from './utils/privateRoute';
+import { useStores } from './hooks/useStores';
 
-// components
-import Header from "./components/header";
-import Mainpage from "./components/mainpage";
+// Components
+import Mainpage from 'pages/mainpage';
+import Dashboard from 'pages/dashboard';
+import Signin from 'pages/signin';
+import Signup from 'pages/signup';
 
-// styles
-import "bootstrap/dist/css/bootstrap.min.css";
-import "./App.sass";
-
-type AppComponentProps = {
-  routing?: any;
-  Navigation?: any;
+const App = () => {
+  return (
+    <BrowserRouter>
+      <div>
+        <Routes>
+          <Route path="/" element={<Mainpage />} />
+          <Route path="/signin" element={<Signin />} />
+          <Route path="/Signup" element={<Signup />} />
+          <Route path="/" element={<Mainpage />} />
+          <Route element={<PrivateRoute />} path="/dashboard/*">
+            <Route path="/dashboard/*" element={<Dashboard />} />
+          </Route>
+        </Routes>
+      </div>
+    </BrowserRouter>
+  );
 };
 
-const AppComponent: React.FC<AppComponentProps> = inject(
-  "routing",
-  "Navigation"
-)(
-  observer(({ Navigation }: AppComponentProps): JSX.Element => {
-    const { menuItems } = Navigation;
-    return (
-      <div className="App">
-        <Header menuItems={menuItems} />
-        <Route exact path={`/`} component={Mainpage} />
-      </div>
-    );
-  })
-);
-
-export default AppComponent;
+export default App;
